@@ -1,4 +1,4 @@
 package br.com.lexcoins.enums;
 
-public class Crypto {
+public enum Crypto {
 }
