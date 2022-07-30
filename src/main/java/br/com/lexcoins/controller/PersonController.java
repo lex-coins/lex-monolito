@@ -1,7 +1,7 @@
 package br.com.lexcoins.controller;
 
-import br.com.lexcoins.Dto.Person.PersonResponseDTO;
-import br.com.lexcoins.Service.PersonService;
+import br.com.lexcoins.dto.person.PersonResponseDTO;
+import br.com.lexcoins.service.PersonService;
 import br.com.lexcoins.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package br.com.lexcoins.Dto.Person;
+package br.com.lexcoins.dto.person;
 
 import br.com.lexcoins.model.Wallet;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package br.com.lexcoins.Config;
+package br.com.lexcoins.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

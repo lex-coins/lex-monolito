@@ -1,14 +1,13 @@
-package br.com.lexcoins.Service;
+package br.com.lexcoins.service;
 
-import br.com.lexcoins.Dto.Person.PersonRequestDTO;
-import br.com.lexcoins.Dto.Person.PersonResponseDTO;
+import br.com.lexcoins.dto.person.PersonRequestDTO;
+import br.com.lexcoins.dto.person.PersonResponseDTO;
 import br.com.lexcoins.Repository.PersonRepository;
 import br.com.lexcoins.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
 import java.util.List;
 import java.util.Optional;

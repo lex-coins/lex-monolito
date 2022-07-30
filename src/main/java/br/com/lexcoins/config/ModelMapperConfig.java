@@ -1,4 +1,4 @@
-package br.com.lexcoins.Config;
+package br.com.lexcoins.config;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class ModelMapperConfig {
 
     @Bean
-    public ModelMapper ModelMapper(){
+    public ModelMapper modelMapper(){
         var modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         return modelMapper;
