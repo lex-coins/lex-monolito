@@ -19,8 +19,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @OneToMany
+    private List<Wallet> wallet;
     @OneToOne
-    private Wallet wallet;
-    private BigDecimal balance;
+    private MainWallet mainWallet;
 
 }
