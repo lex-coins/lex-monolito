@@ -23,5 +23,6 @@ public class Person {
     private List<Wallet> wallet;
     @OneToOne
     private MainWallet mainWallet;
+    //SERIA INTERESSANTE O USUÁRIO UM ATRIBUTO PARAS AS FORMAS DE PAGAMENTO? (enum paymentos)
 
 }

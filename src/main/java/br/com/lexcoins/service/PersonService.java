@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 public class PersonService {
-    final ModelMapper modelMapper;
     final PersonRepository personRepository;
 
     public List<Person> findAll(){
@@ -34,6 +33,7 @@ public class PersonService {
 
     public Person updatePerson(Long id, Person person){
         Optional<Person> personEntity = personRepository.findById(id);
+        //PARA ESSE CASO NÃO SERIA !personEntity.isPresent(), é um update, caso ele não encontre a Pessoa, aí ele retorna um erro
         if(personEntity.isPresent()){
             new RuntimeException();
         }
@@ -44,26 +44,4 @@ public class PersonService {
         var person = findById(id);
         personRepository.delete(person);
     }
-
-    public PersonRequestDTO conversorEntidadeParaDTO(Person clubes){
-        return modelMapper.map(clubes, PersonRequestDTO.class);
-    }
-
-    public PersonResponseDTO conversorEntidadeParaDTOResponse(Person clubes){
-        return modelMapper.map(clubes, PersonResponseDTO.class);
-    }
-
-    public List<PersonRequestDTO> conversorEntidadeParaDTO(List<Person> people){
-        return people.stream()
-                .map(person -> modelMapper.map(person, PersonRequestDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    public List<PersonResponseDTO> conversorEntidadeParaDTOResponse(List<Person> people){
-        return people.stream()
-                .map(person -> modelMapper.map(person, PersonResponseDTO.class))
-                .collect(Collectors.toList());
-    }
-
-
 }
