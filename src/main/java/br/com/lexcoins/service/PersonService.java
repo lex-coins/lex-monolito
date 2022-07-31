@@ -1,14 +1,13 @@
-package br.com.lexcoins.Service;
+package br.com.lexcoins.service;
 
-import br.com.lexcoins.Dto.Person.PersonRequestDTO;
-import br.com.lexcoins.Dto.Person.PersonResponseDTO;
+import br.com.lexcoins.dto.person.PersonRequestDTO;
+import br.com.lexcoins.dto.person.PersonResponseDTO;
 import br.com.lexcoins.Repository.PersonRepository;
 import br.com.lexcoins.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 public class PersonService {
-    final ModelMapper modelMapper;
     final PersonRepository personRepository;
 
     public List<Person> findAll(){
@@ -35,6 +33,7 @@ public class PersonService {
 
     public Person updatePerson(Long id, Person person){
         Optional<Person> personEntity = personRepository.findById(id);
+        //PARA ESSE CASO NÃO SERIA !personEntity.isPresent(), é um update, caso ele não encontre a Pessoa, aí ele retorna um erro
         if(personEntity.isPresent()){
             new RuntimeException();
         }
@@ -45,26 +44,4 @@ public class PersonService {
         var person = findById(id);
         personRepository.delete(person);
     }
-
-    public PersonRequestDTO conversorEntidadeParaDTO(Person clubes){
-        return modelMapper.map(clubes, PersonRequestDTO.class);
-    }
-
-    public PersonResponseDTO conversorEntidadeParaDTOResponse(Person clubes){
-        return modelMapper.map(clubes, PersonResponseDTO.class);
-    }
-
-    public List<PersonRequestDTO> conversorEntidadeParaDTO(List<Person> people){
-        return people.stream()
-                .map(person -> modelMapper.map(person, PersonRequestDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    public List<PersonResponseDTO> conversorEntidadeParaDTOResponse(List<Person> people){
-        return people.stream()
-                .map(person -> modelMapper.map(person, PersonResponseDTO.class))
-                .collect(Collectors.toList());
-    }
-
-
 }

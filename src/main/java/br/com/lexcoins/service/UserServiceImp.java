@@ -1,4 +1,4 @@
-package br.com.lexcoins.Service;
+package br.com.lexcoins.service;
 
 import br.com.lexcoins.Repository.UserRepository;
 import br.com.lexcoins.model.UserModel;
