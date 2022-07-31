@@ -5,23 +5,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
-public class Wallet {
+public class Historic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String TransactionType;
+    private String toKeyPublic;
+    private String fromKeyPublic;
     @ManyToOne
-    private Crypto cryptos;
+    private Wallet wallet;
     private Double amount;
-    private String publicKey;
-    private String privateKey;
-    @OneToMany
-    private List<Historic> historics;
+
 }
