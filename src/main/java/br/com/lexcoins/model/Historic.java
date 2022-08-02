@@ -15,7 +15,7 @@ public class Historic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String TransactionType;
+    private String transactionType;
     private String toKeyPublic;
     private String fromKeyPublic;
     @ManyToOne

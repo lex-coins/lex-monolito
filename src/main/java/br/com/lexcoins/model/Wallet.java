@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -24,4 +23,8 @@ public class Wallet {
     private String privateKey;
     @OneToMany
     private List<Historic> historics;
+
+    @ManyToOne
+    @JoinColumn(name="person_id")
+    private Person person;
 }
