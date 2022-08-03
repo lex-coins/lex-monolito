@@ -3,7 +3,6 @@ package br.com.lexcoins.controller;
 import br.com.lexcoins.dto.wallet.WalletRequestDTO;
 import br.com.lexcoins.dto.wallet.WalletResponseDTO;
 import br.com.lexcoins.mappers.WalletMapper;
-import br.com.lexcoins.model.Wallet;
 import br.com.lexcoins.service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

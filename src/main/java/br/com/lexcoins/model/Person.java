@@ -20,7 +20,8 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
     private List<Wallet> wallet;
     @OneToOne
     private MainWallet mainWallet;
