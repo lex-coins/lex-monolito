@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class SalesOrderDTO {
+public class SalesOrderRequestDTO {
 
     private Long brokerId;
     private ExchangeDTO buyer;

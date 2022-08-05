@@ -1,6 +1,6 @@
 package br.com.lexcoins.controller;
 
-import br.com.lexcoins.dto.salesOrder.SalesOrderDTO;
+import br.com.lexcoins.dto.salesOrder.SalesOrderRequestDTO;
 import br.com.lexcoins.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,8 @@ public class TransactionController {
     final TransactionService transactionService;
 
     @PostMapping
-    public ResponseEntity<Void> executeTransaction(@RequestBody SalesOrderDTO salesOrderDTO) {
-        transactionService.execute(salesOrderDTO);
+    public ResponseEntity<Void> executeTransaction(@RequestBody SalesOrderRequestDTO salesOrderRequestDTO) {
+        transactionService.execute(salesOrderRequestDTO);
         return ResponseEntity.ok().build();
     }
 }
