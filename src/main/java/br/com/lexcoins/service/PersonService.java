@@ -1,8 +1,10 @@
 package br.com.lexcoins.service;
 
+import br.com.lexcoins.dto.cards.CardRequestDTO;
 import br.com.lexcoins.dto.person.PersonRequestDTO;
 import br.com.lexcoins.dto.person.PersonResponseDTO;
 import br.com.lexcoins.Repository.PersonRepository;
+import br.com.lexcoins.model.Card;
 import br.com.lexcoins.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PersonService {
     final PersonRepository personRepository;
+    private final CardService cardService;
 
     public List<Person> findAll(){
         return personRepository.findAll();
@@ -42,5 +45,12 @@ public class PersonService {
     public void deletePersonById(Long id){
         var person = findById(id);
         personRepository.delete(person);
+    }
+
+    public Person addCreditCard(Long id, CardRequestDTO request) {
+        Card card = cardService.save(request);
+        Person person = findById(id);
+        person.getCards().add(card);
+        return personRepository.save(person);
     }
 }
