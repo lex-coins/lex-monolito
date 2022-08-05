@@ -7,7 +7,6 @@ import br.com.lexcoins.mappers.PersonMapper;
 import br.com.lexcoins.mappers.WalletMapper;
 import br.com.lexcoins.model.Wallet;
 import br.com.lexcoins.service.PersonService;
-import br.com.lexcoins.model.Person;
 import br.com.lexcoins.service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,6 @@ public class PersonController {
 
     final PersonService personService;
     final WalletService walletService;
-
     final PersonMapper personMapper;
     final WalletMapper walletMapper;
 
@@ -32,6 +30,7 @@ public class PersonController {
     public ResponseEntity<List<PersonResponseDTO>> findAll() {
         return ResponseEntity.ok(personMapper.personListToPersonResponseDtoListMapper(personService.findAll()));
     }
+
     @PostMapping
     public ResponseEntity<Void> saveUser(@RequestBody PersonRequestDTO personRequestDTO) {
         var personEntity = personService.savePerson(personMapper.personRequestDtoToPersonMapper(personRequestDTO));
@@ -39,17 +38,20 @@ public class PersonController {
                 .path("/{id}").buildAndExpand(personEntity.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<PersonResponseDTO> findById(@PathVariable Long id) {
-        var personEntity =  personService.findById(id);
-        return ResponseEntity.ok(personMapper.personListToPersonResponseDtoListMapper(personEntity));
+        var personEntity = personService.findById(id);
+        return ResponseEntity.ok(personMapper.personToPersonResponseDtoMapper(personEntity));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<PersonResponseDTO> updateUser(@PathVariable Long id,
-                                             @RequestBody Person user) {
-        return ResponseEntity.ok(personMapper.personListToPersonResponseDtoListMapper(
-                personService.updatePerson(id, user)
-        ));
+                                                        @RequestBody PersonRequestDTO user) {
+        var personEntity = personMapper.personRequestDtoToPersonMapper(user);
+
+        return ResponseEntity.ok(personMapper.personToPersonResponseDtoMapper(
+                personService.updatePerson(id, personEntity)));
     }
 
     @GetMapping("/{id}/wallets")

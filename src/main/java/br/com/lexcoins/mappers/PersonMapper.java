@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,28 +15,18 @@ public class PersonMapper {
 
     final ModelMapper modelMapper;
 
-    public PersonRequestDTO personToPersonRequestDtoMapper(Person person){
-        return modelMapper.map(person, PersonRequestDTO.class);
-    }
-
-    public Person personRequestDtoToPersonMapper(PersonRequestDTO personRequestDTO){
+    public Person personRequestDtoToPersonMapper(PersonRequestDTO personRequestDTO) {
         return modelMapper.map(personRequestDTO, Person.class);
     }
 
-    public PersonResponseDTO personListToPersonResponseDtoListMapper(Person clubes){
-        return modelMapper.map(clubes, PersonResponseDTO.class);
+    public PersonResponseDTO personToPersonResponseDtoMapper(Person person) {
+        return modelMapper.map(person, PersonResponseDTO.class);
     }
 
-    public List<PersonRequestDTO> personListToPersonRequestDtoListMapper(List<Person> people){
-        return people.stream()
-                .map(person -> modelMapper.map(person, PersonRequestDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    public List<PersonResponseDTO> personListToPersonResponseDtoListMapper(List<Person> people){
+    public List<PersonResponseDTO> personListToPersonResponseDtoListMapper(List<Person> people) {
         return people.stream()
                 .map(person -> modelMapper.map(person, PersonResponseDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

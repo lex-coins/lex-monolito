@@ -1,26 +1,27 @@
 package br.com.lexcoins.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
-
-
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "TB_PERSON")
-public class Person {
+@Data
+@Entity(name = "TB_BROKER")
+
+public class Broker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
-    private List<Wallet> wallet;
-    @OneToOne
+    @OneToMany
+    private List<Book>books;
+    private BigDecimal cryptoExchangeRate;
+
+    @ManyToOne
+    @JoinColumn(name = "main_wallet_id")
     private MainWallet mainWallet;
 }

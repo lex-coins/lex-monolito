@@ -24,7 +24,7 @@ public class PersonService {
     }
 
     public Person findById(Long id){
-        return personRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        return personRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public Person savePerson(Person person){
@@ -33,9 +33,8 @@ public class PersonService {
 
     public Person updatePerson(Long id, Person person){
         Optional<Person> personEntity = personRepository.findById(id);
-        //PARA ESSE CASO NÃO SERIA !personEntity.isPresent(), é um update, caso ele não encontre a Pessoa, aí ele retorna um erro
-        if(personEntity.isPresent()){
-            new RuntimeException();
+        if(personEntity.isEmpty()){
+            throw new RuntimeException();
         }
         return personRepository.save(person);
     }
