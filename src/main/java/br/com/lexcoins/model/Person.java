@@ -4,6 +4,7 @@ package br.com.lexcoins.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -24,4 +25,8 @@ public class Person {
     private List<Wallet> wallet;
     @OneToOne
     private MainWallet mainWallet;
+    private String pix;
+    @OneToOne
+    private UserModel userModel;
+
 }
