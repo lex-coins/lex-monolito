@@ -27,15 +27,14 @@ public class PersonService {
     }
 
     public Person savePerson(Person person){
+
         return personRepository.save(person);
     }
 
     public Person updatePerson(Long id, Person person){
         Optional<Person> personEntity = personRepository.findById(id);
         //PARA ESSE CASO NÃO SERIA !personEntity.isPresent(), é um update, caso ele não encontre a Pessoa, aí ele retorna um erro
-        if(personEntity.isPresent()){
-            new RuntimeException();
-        }
+
         return personRepository.save(person);
     }
 
