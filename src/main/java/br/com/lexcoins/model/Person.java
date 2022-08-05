@@ -24,4 +24,6 @@ public class Person {
     private List<Wallet> wallet;
     @OneToOne
     private MainWallet mainWallet;
+    @OneToMany
+    private List<Card> cards;
 }
