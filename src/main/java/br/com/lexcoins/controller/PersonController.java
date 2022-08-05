@@ -1,5 +1,6 @@
 package br.com.lexcoins.controller;
 
+import br.com.lexcoins.dto.cards.CardRequestDTO;
 import br.com.lexcoins.dto.person.PersonRequestDTO;
 import br.com.lexcoins.dto.person.PersonResponseDTO;
 import br.com.lexcoins.dto.wallet.WalletResponseDTO;
@@ -10,10 +11,13 @@ import br.com.lexcoins.service.PersonService;
 import br.com.lexcoins.model.Person;
 import br.com.lexcoins.service.WalletService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -58,4 +62,10 @@ public class PersonController {
         return ResponseEntity.ok(walletMapper.walletListToWalletResponseDTOListMapper(listByPersonId));
     }
 
+    @PatchMapping("/{id}/cards/add")
+    public ResponseEntity<PersonResponseDTO> addCreditCard(@PathVariable Long id,
+                                                           @RequestBody @Valid CardRequestDTO request){
+        Person person = personService.addCreditCard(id, request);
+        return new ResponseEntity<>(new PersonResponseDTO(person), HttpStatus.OK);
+    }
 }
