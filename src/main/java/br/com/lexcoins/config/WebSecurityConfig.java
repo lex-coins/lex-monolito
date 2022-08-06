@@ -16,16 +16,16 @@ public class WebSecurityConfig {
         http.
                 csrf().disable()
                 .httpBasic()
-//                .and()
-//                .authorizeHttpRequests()
-//                .anyRequest()
-//                .permitAll();
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers(HttpMethod.GET).authenticated()
-                .antMatchers(HttpMethod.POST).hasAnyRole("USER","ADMIN")
-                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-                .anyRequest().authenticated();
+                .anyRequest()
+                .permitAll();
+//                .and()
+//                .authorizeHttpRequests()
+//                .antMatchers(HttpMethod.GET).authenticated()
+//                .antMatchers(HttpMethod.POST).hasAnyRole("USER","ADMIN")
+//                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+//                .anyRequest().authenticated();
         return http.build();
     }
 
