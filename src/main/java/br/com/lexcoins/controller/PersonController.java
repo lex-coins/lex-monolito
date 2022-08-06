@@ -8,16 +8,18 @@ import br.com.lexcoins.mappers.CardMapper;
 import br.com.lexcoins.mappers.PersonMapper;
 import br.com.lexcoins.mappers.UserMapper;
 import br.com.lexcoins.mappers.WalletMapper;
+import br.com.lexcoins.model.Person;
 import br.com.lexcoins.model.Wallet;
 import br.com.lexcoins.service.CardService;
 import br.com.lexcoins.service.PersonService;
+
 import br.com.lexcoins.model.Person;
 import br.com.lexcoins.service.UserServiceImp;
+
 import br.com.lexcoins.service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -32,8 +34,10 @@ public class PersonController {
 
     final PersonService personService;
     final WalletService walletService;
+
     final CardService cardService;
     final UserServiceImp userServiceImp;
+
     final PersonMapper personMapper;
     final WalletMapper walletMapper;
     final UserMapper userMapper;
@@ -45,6 +49,7 @@ public class PersonController {
         var convert = personMapper.personListToPersonResponseDtoListMapper(list);
         return ResponseEntity.ok(convert);
     }
+
     @PostMapping
     public ResponseEntity<Void> saveUser(@RequestBody PersonRequestDTO personRequestDTO) {
         var personEntity = personService.savePerson(personMapper.personRequestDtoToPersonMapper(personRequestDTO));
@@ -53,17 +58,22 @@ public class PersonController {
                 .path("/{id}").buildAndExpand(personEntity.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<PersonResponseDTO> findById(@PathVariable Long id) {
+
         var personEntity =  personService.findById(id);
+
         return ResponseEntity.ok(personMapper.personToPersonResponseDtoMapper(personEntity));
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<PersonResponseDTO> updateUser(@PathVariable Long id,
+
                                              @RequestBody Person user) {
         return ResponseEntity.ok(personMapper.personToPersonResponseDtoMapper(
                 personService.updatePerson(id, user)
         ));
+
     }
 
     @GetMapping("/{id}/wallets")

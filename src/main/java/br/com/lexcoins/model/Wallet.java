@@ -10,14 +10,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "TB_WALLET")
 public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Crypto cryptos;
+    private Crypto crypto;
     private Double amount;
     private String publicKey;
     private String privateKey;

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -15,8 +14,9 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@NamedEntityGraph
+
+@Entity(name = "TB_PERSON")
+
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

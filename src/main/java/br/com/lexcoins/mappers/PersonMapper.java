@@ -12,14 +12,17 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
 import java.util.Random;
 import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
 public class PersonMapper {
 
     final ModelMapper modelMapper;
+
 
     public PersonRequestDTO personToPersonRequestDtoMapper(Person person){
         return modelMapper.map(person, PersonRequestDTO.class);
@@ -40,12 +43,13 @@ public class PersonMapper {
         return people.stream()
                 .map(person -> modelMapper.map(person, PersonRequestDTO.class))
                 .collect(Collectors.toList());
+
     }
 
-    public List<PersonResponseDTO> personListToPersonResponseDtoListMapper(List<Person> people){
+    public List<PersonResponseDTO> personListToPersonResponseDtoListMapper(List<Person> people) {
         return people.stream()
                 .map(person -> modelMapper.map(person, PersonResponseDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public PersonResponseDTO personToPersonResponseDtoMapper(Person updatePerson) {
