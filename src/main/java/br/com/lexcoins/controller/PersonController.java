@@ -68,7 +68,7 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-
+    public ResponseEntity<PersonResponseDTO> updateUser(@PathVariable Long id,
                                              @RequestBody Person user) {
         return ResponseEntity.ok(personMapper.personToPersonResponseDtoMapper(
                 personService.updatePerson(id, user)

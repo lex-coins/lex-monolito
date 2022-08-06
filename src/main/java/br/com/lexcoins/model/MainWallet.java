@@ -22,6 +22,4 @@ public class MainWallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal amount;
-    private String price;
-    private String currency;
 }

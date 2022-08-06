@@ -1,11 +1,6 @@
 package br.com.lexcoins.service;
 
 
-import br.com.lexcoins.dto.cards.CardRequestDTO;
-import br.com.lexcoins.dto.person.PersonRequestDTO;
-import br.com.lexcoins.dto.person.PersonResponseDTO;
-import br.com.lexcoins.Repository.PersonRepository;
-
 import br.com.lexcoins.exception.DataConflictException;
 import br.com.lexcoins.exception.PersonNotFoundException;
 import br.com.lexcoins.repository.PersonRepository;
@@ -14,18 +9,12 @@ import br.com.lexcoins.model.Card;
 import br.com.lexcoins.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.modelmapper.ModelMapper;
-
-import org.springframework.dao.DataIntegrityViolationException;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
+
 
 import javax.transaction.Transactional;
 import java.util.List;
-
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @Service
