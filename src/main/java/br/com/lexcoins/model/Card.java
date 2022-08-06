@@ -1,8 +1,8 @@
 package br.com.lexcoins.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,7 +10,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "TB_CARDS")
-public class Card implements Serializable {
+@Data
+public class Card{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,4 +25,6 @@ public class Card implements Serializable {
     private String cvv;
     @Column(nullable = false)
     private String expiration;
+
+
 }

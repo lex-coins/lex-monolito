@@ -16,6 +16,10 @@ public class WebSecurityConfig {
         http.
                 csrf().disable()
                 .httpBasic()
+//                .and()
+//                .authorizeHttpRequests()
+//                .anyRequest()
+//                .permitAll();
                 .and()
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET).authenticated()

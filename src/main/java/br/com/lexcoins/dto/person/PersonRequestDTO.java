@@ -13,6 +13,6 @@ import java.math.BigDecimal;
 public class PersonRequestDTO {
 
     private String name;
-    private Wallet wallet;
-    private BigDecimal balance;
+    private String password;
+    private String username;
 }
