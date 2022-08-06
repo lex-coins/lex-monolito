@@ -1,4 +1,4 @@
-package br.com.lexcoins.Repository;
+package br.com.lexcoins.repository;
 
 import br.com.lexcoins.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;

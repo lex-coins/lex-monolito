@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class MainWalletRequestDTO {
+public class MainWalletResponse {
 
     private BigDecimal amount;
 }
