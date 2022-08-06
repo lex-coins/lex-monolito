@@ -1,6 +1,7 @@
 package br.com.lexcoins.service;
 
-import br.com.lexcoins.Repository.CardRepository;
+import br.com.lexcoins.exception.CardNotFoundException;
+import br.com.lexcoins.repository.CardRepository;
 import br.com.lexcoins.dto.cards.CardRequestDTO;
 import br.com.lexcoins.model.Card;
 import lombok.AllArgsConstructor;
@@ -13,23 +14,14 @@ import java.util.List;
 public class CardService {
     private final CardRepository repository;
 
-    public List<Card> findAll(){
-        return repository.findAll();
-    }
 
-    public Card save(CardRequestDTO request){
-        return repository.save(new Card(
-                null,
-                request.getNetwork(),
-                request.getNumber(),
-                request.getName(),
-                request.getCvv(),
-                request.getExpiration()
-        ));
+    public Card save(Card card){
+        return repository.save(card);
     }
 
     public Card findByNumber(String number){
-        return repository.findByNumber(number).orElseThrow(RuntimeException::new);
+        return repository.findByNumber(number)
+                .orElseThrow(() -> { throw new CardNotFoundException("Cartão não encontrado"); });
     }
 
     public Card update(String number, CardRequestDTO request){

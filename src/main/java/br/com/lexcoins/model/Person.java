@@ -9,25 +9,28 @@ import org.springframework.beans.factory.annotation.Required;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@NamedEntityGraph
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String username;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private List<Wallet> wallet;
     @OneToOne
     private MainWallet mainWallet;
-    @OneToMany
-    private List<Card> cards;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "card_id", referencedColumnName = "id")
+    private Set<Card> cards;
     private String pix;
-    @OneToOne
-    private UserModel userModel;
+
 }

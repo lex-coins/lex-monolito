@@ -17,7 +17,6 @@ public class CardRequestDTO {
     private String network;
     @NotEmpty
     @Size(max = 16)
-    @CreditCardNumber
     private String number;
     @NotEmpty
     private String name;

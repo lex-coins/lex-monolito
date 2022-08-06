@@ -1,7 +1,7 @@
 package br.com.lexcoins.service;
 
-import br.com.lexcoins.Repository.WalletRepositoy;
 import br.com.lexcoins.model.Wallet;
+import br.com.lexcoins.repository.WalletRepositoy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WalletService {
     private final WalletRepositoy walletRepositoy;
+    private final PersonService personService;
 
     public List<Wallet> findAll() {
         return walletRepositoy.findAll();
@@ -25,6 +26,9 @@ public class WalletService {
     }
 
     public List<Wallet> findByPersonId(Long id) {
-        return walletRepositoy.findByPersonId(id);
+        var person = personService.findById(id);
+        return walletRepositoy.findByPerson(person);
     }
+
+
 }
