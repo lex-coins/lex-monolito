@@ -1,6 +1,6 @@
 package br.com.lexcoins.service;
 
-import br.com.lexcoins.dto.salesOrder.SalesOrderRequestDTO;
+import br.com.lexcoins.dto.transaction.TransactionRequestDTO;
 import br.com.lexcoins.model.Broker;
 import br.com.lexcoins.model.Crypto;
 import br.com.lexcoins.model.Person;
@@ -17,33 +17,33 @@ public class TransactionService {
     final PersonService personService;
     final BrokerService brokerService;
 
-    public void execute(SalesOrderRequestDTO salesOrderRequestDTO) {
-        Person buyer = personService.findById(salesOrderRequestDTO.getBuyer().getPersonId());
-        Person seller = personService.findById(salesOrderRequestDTO.getSeller().getPersonId());
-        Wallet sellerWallet = getPersonWallet(salesOrderRequestDTO, seller);
-        Broker broker = brokerService.findById(salesOrderRequestDTO.getBrokerId());
+    public void execute(TransactionRequestDTO transactionRequestDTO) {
+        Person buyer = personService.findById(transactionRequestDTO.getBuyer().getPersonId());
+        Person seller = personService.findById(transactionRequestDTO.getSeller().getPersonId());
+        Wallet sellerWallet = getPersonWallet(transactionRequestDTO, seller);
+        Broker broker = brokerService.findById(transactionRequestDTO.getBrokerId());
 
-        BigDecimal purchaseAmount = getCryptoPurchaseAmount(salesOrderRequestDTO.getSalesAmount(), sellerWallet.getCrypto());
+        BigDecimal purchaseAmount = getCryptoPurchaseAmount(transactionRequestDTO.getSalesAmount(), sellerWallet.getCrypto());
         BigDecimal brokerServiceCharge = getBrokerServiceCharge(broker, purchaseAmount);
 
         if (isAmountValid(buyer, purchaseAmount)) {
             executeTransaction(buyer, seller, purchaseAmount, brokerServiceCharge);
-            exchangeBuyerCryptos(buyer, sellerWallet, salesOrderRequestDTO);
+            exchangeBuyerCryptos(buyer, sellerWallet, transactionRequestDTO);
             exchangeSellerCryptos(seller, sellerWallet);
 
             BigDecimal brokerOriginalAmount = broker.getMainWallet().getAmount();
             broker.getMainWallet().setAmount(brokerOriginalAmount.add(brokerServiceCharge));
 
-            updateTransactions(salesOrderRequestDTO, buyer, seller, broker);
+            updateTransactions(transactionRequestDTO, buyer, seller, broker);
         } else {
             throw new RuntimeException();
         }
     }
 
-    private void updateTransactions(SalesOrderRequestDTO salesOrderRequestDTO, Person buyer, Person seller, Broker broker) {
-        personService.updatePerson(salesOrderRequestDTO.getBuyer().getPersonId(), buyer);
-        personService.updatePerson(salesOrderRequestDTO.getSeller().getPersonId(), seller);
-        brokerService.updateBroker(salesOrderRequestDTO.getBrokerId(), broker);
+    private void updateTransactions(TransactionRequestDTO transactionRequestDTO, Person buyer, Person seller, Broker broker) {
+        personService.updatePerson(transactionRequestDTO.getBuyer().getPersonId(), buyer);
+        personService.updatePerson(transactionRequestDTO.getSeller().getPersonId(), seller);
+        brokerService.updateBroker(transactionRequestDTO.getBrokerId(), broker);
     }
 
     private void executeTransaction(Person buyer, Person seller,
@@ -54,8 +54,8 @@ public class TransactionService {
         executeSellerTransaction(seller, purchaseAmount, brokerServiceCharge);
     }
 
-    private void exchangeBuyerCryptos(Person buyer, Wallet sellerWallet, SalesOrderRequestDTO salesOrderRequestDTO) {
-        Wallet buyerWallet = getPersonWallet(salesOrderRequestDTO, buyer);
+    private void exchangeBuyerCryptos(Person buyer, Wallet sellerWallet, TransactionRequestDTO transactionRequestDTO) {
+        Wallet buyerWallet = getPersonWallet(transactionRequestDTO, buyer);
         if (buyerWallet != null) {
             buyer.getWallet().forEach(wallet -> {
                 if (wallet.getCrypto().getId().equals(buyerWallet.getCrypto().getId())) {
@@ -90,9 +90,9 @@ public class TransactionService {
         seller.getMainWallet().setAmount(buyerWalletAmount.add(transactionPrice));
     }
 
-    private Wallet getPersonWallet(SalesOrderRequestDTO salesOrderRequestDTO, Person person) {
+    private Wallet getPersonWallet(TransactionRequestDTO transactionRequestDTO, Person person) {
         return person.getWallet().stream().filter(wallet -> wallet.getCrypto()
-                        .getId().equals(salesOrderRequestDTO.getCryptoId()))
+                        .getId().equals(transactionRequestDTO.getCryptoId()))
                 .findFirst().orElse(null);
     }
 
