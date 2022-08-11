@@ -1,4 +1,4 @@
-package br.com.lexcoins.dto.transaction;
+package br.com.lexcoins.dto.market;
 
 import br.com.lexcoins.dto.exchange.ExchangeDTO;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionRequestDTO {
+public class MarketRequestDTO {
 
     private Long brokerId;
     private ExchangeDTO buyer;

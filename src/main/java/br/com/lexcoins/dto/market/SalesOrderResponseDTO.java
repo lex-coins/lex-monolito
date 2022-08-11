@@ -1,4 +1,4 @@
-package br.com.lexcoins.dto.transaction;
+package br.com.lexcoins.dto.market;
 
 import br.com.lexcoins.dto.person.PersonRequestDTO;
 import lombok.AllArgsConstructor;

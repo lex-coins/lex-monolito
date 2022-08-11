@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Entity(name = "TB_BROKER")
 
-public class Broker {
+public class Market {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +20,6 @@ public class Broker {
     @OneToMany
     private List<Book>books;
     private BigDecimal cryptoExchangeRate;
-
     @ManyToOne
     @JoinColumn(name = "main_wallet_id")
     private MainWallet mainWallet;

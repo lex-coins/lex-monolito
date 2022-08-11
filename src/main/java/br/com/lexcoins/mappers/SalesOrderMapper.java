@@ -1,10 +1,7 @@
 package br.com.lexcoins.mappers;
 
-import br.com.lexcoins.dto.broker.BrokerRequestDTO;
-import br.com.lexcoins.dto.broker.BrokerResponseDTO;
-import br.com.lexcoins.dto.transaction.SalesOrderRequestDTO;
-import br.com.lexcoins.dto.transaction.SalesOrderResponseDTO;
-import br.com.lexcoins.model.Broker;
+import br.com.lexcoins.dto.market.SalesOrderRequestDTO;
+import br.com.lexcoins.dto.market.SalesOrderResponseDTO;
 import br.com.lexcoins.model.SalesOrder;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

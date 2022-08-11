@@ -1,7 +1,7 @@
 package br.com.lexcoins.controller;
 
-import br.com.lexcoins.dto.transaction.TransactionRequestDTO;
-import br.com.lexcoins.service.TransactionService;
+import br.com.lexcoins.dto.market.MarketRequestDTO;
+import br.com.lexcoins.service.MarketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/transactions")
 @RequiredArgsConstructor
-public class TransactionController {
+public class MarketController {
 
-    final TransactionService transactionService;
+    final MarketService marketService;
 
     @PostMapping
-    public ResponseEntity<Void> executeTransaction(@RequestBody TransactionRequestDTO transactionRequestDTO) {
-        transactionService.execute(transactionRequestDTO);
+    public ResponseEntity<Void> executeMarket(@RequestBody MarketRequestDTO marketRequestDTO) {
+        marketService.execute(marketRequestDTO);
         return ResponseEntity.ok().build();
     }
 }

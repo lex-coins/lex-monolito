@@ -2,7 +2,7 @@ package br.com.lexcoins.mappers;
 
 import br.com.lexcoins.dto.broker.BrokerRequestDTO;
 import br.com.lexcoins.dto.broker.BrokerResponseDTO;
-import br.com.lexcoins.model.Broker;
+import br.com.lexcoins.model.Market;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
 public class BrokerMapper {
     final ModelMapper modelMapper;
 
-    public BrokerRequestDTO brokerToBrokerRequestDtoMapper(Broker broker){
-        return modelMapper.map(broker, BrokerRequestDTO.class);
+    public BrokerRequestDTO brokerToBrokerRequestDtoMapper(Market market){
+        return modelMapper.map(market, BrokerRequestDTO.class);
     }
 
-    public Broker brokerRequestDtoToBrokerMapper(BrokerRequestDTO brokerRequestDTO){
-        return modelMapper.map(brokerRequestDTO, Broker.class);
+    public Market brokerRequestDtoToBrokerMapper(BrokerRequestDTO brokerRequestDTO){
+        return modelMapper.map(brokerRequestDTO, Market.class);
     }
 
-    public BrokerResponseDTO brokerToBrokerResponseDtoMapper(Broker broker){
-        return modelMapper.map(broker, BrokerResponseDTO.class);
+    public BrokerResponseDTO brokerToBrokerResponseDtoMapper(Market market){
+        return modelMapper.map(market, BrokerResponseDTO.class);
     }
 
 
